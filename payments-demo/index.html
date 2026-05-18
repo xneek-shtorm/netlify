@@ -3,13 +3,89 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+
   <title>Payments DEMO</title>
 </head>
 <body>
-  Payments DEMO
-  <br>
-  <br>
-  <br>
-  <a href="../">← GO HOME 🏠</a>
+  <div class="container text-center">
+    <div class="display-3">Payments DEMO</div>
+    <input placeholder="Custom data from payments site" id="inp" class="form-control mt-3 mb-3" autofocus />
+    <div id="vars" class="d-flex" style="gap: 12px"> </div>
+  </div>
+
+
+  <script>
+    if (window.parent) {
+      const btn = document.createElement('button');
+      btn.classList.add('btn','btn-primary');
+      btn.textContent = 'Complete payment as window.close';
+
+      btn.onclick = () => {
+        window.close()
+      };
+
+      vars.append(btn);
+    }
+
+    if (document.referrer) {
+        const btn = document.createElement('button');
+        btn.classList.add('btn','btn-warning');
+        btn.textContent = 'Complete payment as post message + window.close';
+
+        btn.onclick = () => {
+          window.parent.postMessage(inp.value, document.referrer.length > 0 ? document.referrer : '*')
+          window.close();
+        };
+        vars.append(btn);
+    }
+
+
+    const urlParams = new URLSearchParams(window.location.search);
+
+    if (urlParams.get('callback')) {
+      const btn = document.createElement('button');
+      btn.classList.add('btn','btn-info');
+      btn.textContent = 'Complete payment with common callback';
+
+      btn.onclick = () => {
+        const url = new URL(urlParams.get('callback'));
+        url.searchParams.set('result', inp.value);
+        window.location.href = url.toString();
+      };
+
+      vars.append(btn);
+    }
+
+    
+    if (urlParams.get('success')) {
+      const btn = document.createElement('button');
+      btn.classList.add('btn','btn-success');
+      btn.textContent = 'Complete payment with success callback ✅';
+
+      btn.onclick = () => {
+        const url = new URL(urlParams.get('success'));
+        url.searchParams.set('result', inp.value);
+        window.location.href = url.toString();
+      };
+
+      vars.append(btn);
+    }
+
+    
+    if (urlParams.get('error')) {
+      const btn = document.createElement('button');
+      btn.classList.add('btn','btn-danger');
+      btn.textContent = 'Complete payment with error callback 🔴';
+
+      btn.onclick = () => {
+        const url = new URL(urlParams.get('error'));
+        url.searchParams.set('result', inp.value);
+        window.location.href = url.toString();
+      };
+
+      vars.append(btn);
+    }
+  </script>
 </body>
 </html>
