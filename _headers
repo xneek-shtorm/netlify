@@ -1,1 +1,8 @@
-X-Frame-Options: SAMEORIGIN
+# a path:
+/index.html
+  # headers for that path:
+  X-Frame-Options: ALLOW
+# another path:
+/payments-demo/*
+  # headers for that path:
+  X-Frame-Options: SAMEORIGIN
