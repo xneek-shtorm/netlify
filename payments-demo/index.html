@@ -44,13 +44,10 @@
     if (document.referrer && urlParams.get('postmessage')) {
         const btn = document.createElement('button');
         btn.classList.add('btn','btn-warning');
-        btn.textContent = 'Complete payment as post message + window.close';
+        btn.textContent = 'Complete payment as post message';
 
         btn.onclick = () => {
           window.parent.postMessage(inp.value, document.referrer.length > 0 ? document.referrer : '*')
-          setTimeout(() => {
-            window.close();
-          }, 500)
         };
         vars.append(btn);
     }
