@@ -29,6 +29,7 @@
 
       vars.append(btn);
     }
+
     if (window.parent) {
       const btn = document.createElement('button');
       btn.classList.add('btn','btn-primary');
@@ -40,20 +41,7 @@
 
       vars.append(btn);
     }
-
-    if (window.opener && document.referrer) {
-        const btn = document.createElement('button');
-        btn.classList.add('btn','btn-warning');
-        btn.textContent = 'Complete payment as post message';
-
-        btn.onclick = () => {
-          window.opener.postMessage(inp.value, document.referrer.length > 0 ? document.referrer : '*')
-        };
-        vars.append(btn);
-    }
-
-
-  
+ 
 
     if (urlParams.get('callback')) {
       const btn = document.createElement('button');
