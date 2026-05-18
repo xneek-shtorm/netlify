@@ -41,13 +41,13 @@
       vars.append(btn);
     }
 
-    if (document.referrer && urlParams.get('postmessage')) {
+    if (window.opener && document.referrer) {
         const btn = document.createElement('button');
         btn.classList.add('btn','btn-warning');
         btn.textContent = 'Complete payment as post message';
 
         btn.onclick = () => {
-          window.parent.postMessage(inp.value, document.referrer.length > 0 ? document.referrer : '*')
+          window.opener.postMessage(inp.value, document.referrer.length > 0 ? document.referrer : '*')
         };
         vars.append(btn);
     }
