@@ -48,7 +48,9 @@
 
         btn.onclick = () => {
           window.parent.postMessage(inp.value, document.referrer.length > 0 ? document.referrer : '*')
-          window.close();
+          setTimeout(() => {
+            window.close();
+          }, 500)
         };
         vars.append(btn);
     }
